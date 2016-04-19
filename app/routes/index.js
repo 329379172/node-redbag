@@ -23,9 +23,10 @@ router.post('/redbag', function (req, res, next) {
             var path = response.req.path;
             log.info(path);
             if(!path) return;
-            let match = path.match(/\/shareRedReward\?shareRed\=(.*?)$/);
-            if(!match || match.length == 0) return;
-            request.post('https://m.longdai.com/grabRedReward?phone=13733987253&shareRed=' + match[1], function(err, result, body){
+            //let match = path.match(/\/shareRedReward\?shareRed\=(.*?)$/);
+            //if(!match || match.length == 0) return;
+            let match = path.split('/');
+            request.post('https://m.longdai.com/grabRedReward?phone=13733987253&shareRed=' + match[match.length - 1], function(err, result, body){
                 if(err) {
                     console.log(err);
                     return;
