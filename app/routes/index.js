@@ -26,12 +26,16 @@ router.post('/redbag', function (req, res, next) {
             //let match = path.match(/\/shareRedReward\?shareRed\=(.*?)$/);
             //if(!match || match.length == 0) return;
             let match = path.split('/');
-            request.post('https://m.longdai.com/grabRedReward?phone=13733987253&shareRed=' + match[match.length - 1], function(err, result, body){
-                if(err) {
-                    console.log(err);
-                    return;
-                }
-                console.log(body);
+            let phonesString = process.env['PHONES'] || ['13733987253'];
+            let phones = phonesString.split('|');
+            phones.forEach(function(phone){
+                request.post('https://m.longdai.com/grabRedReward?phone=' + phone + '&shareRed=' + match[match.length - 1], function(err, result, body){
+                    if(err) {
+                        console.log(err);
+                        return;
+                    }
+                    console.log(body);
+                });
             });
         });
     }
