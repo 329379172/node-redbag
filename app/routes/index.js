@@ -15,6 +15,7 @@ router.post('/redbag', function (req, res, next) {
     log.info(sender);
     log.info(content);
     log.info(group);
+    group = group || "";
     if(group.indexOf('开发')!=-1 || group.indexOf('客服')!=-1 || group.indexOf('龙聚宝')!=-1 || group.indexOf('项目')!=-1) {
         log.info('内部群不能领');
         return res.end('');
