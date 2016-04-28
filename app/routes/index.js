@@ -11,8 +11,14 @@ var log = require('../logger');
 router.post('/redbag', function (req, res, next) {
     let content = req.body.content;
     let sender = req.body.sender;
+    let group = req.body.group;
     log.info(sender);
     log.info(content);
+    log.info(group);
+    if(group.indexOf('开发')!=-1 || group.indexOf('客服')!=-1 || group.indexOf('龙聚宝')!=-1 || group.indexOf('项目')!=-1) {
+        log.info('内部群不能领');
+        return res.end('');
+    }
     if(!content || !sender) return res.end('');
     //var content = req.query.content;
     let matches = content.match(/http[s]?:\/\/[a-zA-z\.\?\=\/0-9]+/g);
