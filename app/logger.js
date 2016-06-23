@@ -7,11 +7,12 @@ var moment = require('moment');
 
 var logger = new (winston.Logger)({
     transports: [
-        new (winston.transports.Console)({
+        new (winston.transports.File)({
             level: 'info',
             timestamp: function() {
                 return moment().format('YYYY-MM-DD HH:mm:ss');
-            }
+            },
+            filename: './log/node-redbag.log'
         })
     ]
 });
